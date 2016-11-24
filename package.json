@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "node-sass styles/ -o assets/css/", 
     "server": "node server.js",
     "rfid": "node rfid.js"
   },
