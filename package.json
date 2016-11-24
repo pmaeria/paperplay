@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "node-sass styles/ -o assets/css/", 
+    "watch": "node-sass styles/ -o assets/css/ -w",
     "server": "node server.js",
     "rfid": "node rfid.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express.io": "^1.1.13"
+    "express.io": "^1.1.13",
+    "node-sass": "^3.13.0",
+    "pug": "^2.0.0-beta6"
   }
 }
