@@ -1,6 +1,8 @@
 const express = require('express.io')
 const app = express().http().io()
 
+app.use('/assets', express.static(__dirname + '/assets'));
+
 app.get('/', function(req, res) {
 	res.send('<h1>Paper Play!</h1>');
 });
