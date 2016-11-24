@@ -10,7 +10,7 @@ client.connect(14150, 'speedwayr-11-a5-1d.local', function() {
 client.on('data', function(data) {
 
 	var id = data.toString();
-	if(id.indexOf('E200497E95A939B13504') > -1) {
+	if(id.indexOf('E200497E95A') > -1) {
 		console.log('Received: ' + id);
 
 		// ping push server
