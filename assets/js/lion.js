@@ -3,11 +3,9 @@ document.body.onkeyup = function(e){
         document.querySelector('.roar').play();
         const lionClass = document.querySelector('.lion').classList;
         lionClass.toggle('show');
-      
-        const leftLeafClass = document.querySelector('.leaf.left').classList;
-        leftLeafClass.toggle('move');
-    
-        const rightLeafClass = document.querySelector('.leaf.right').classList;
-        rightLeafClass.toggle('move');
+
+      	setTimeout(function(){
+	        lionClass.toggle('show');
+      	},3000);
     }
 };
