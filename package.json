@@ -1,0 +1,15 @@
+{
+  "name": "paperplay-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node server.js",
+    "rfid": "node rfid.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express.io": "^1.1.13"
+  }
+}

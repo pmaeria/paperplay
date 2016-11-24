@@ -1,0 +1,98 @@
+
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<div id="app">
+		<div>
+			<svg v-bind:width="zValue" height="110">
+			  <rect v-bind:width="zValue - 10" height="100" style="fill:lightblue;" />
+			</svg>
+		</div>
+
+		<div>
+			<svg v-bind:width="xValue" height="110">
+			  <rect v-bind:width="xValue - 10" height="100" style="fill:lightgreen;" />
+			</svg>
+		</div>
+		<div v-bind:style="{ width: (zValue * 2) + 'px' }" class="z"></div>
+		<div v-bind:style="{ width: (xValue * 2) + 'px' }" class="x"></div>
+	</div>
+	<style>
+		.x, .z {
+			height: 150px;
+			margin-bottom: 20px;
+			transition: all .3s;
+		}
+		.x {
+			background-color: lightgreen;
+		}
+		.z {
+			background-color: lightblue;
+		}
+
+	</style>
+	<script>
+
+		var paperData = {
+			zValue: 10,
+			xValue: 10
+		};
+
+		// takes a callback that returns a data object
+		function socketInit(callback) {
+			var socket = io.connect();
+			socket.on('rfid', callback);
+		}
+
+		socketInit(function(data) {
+			console.log('data', data);
+			paperData.zValue += 20;
+		});
+
+		$('body').keypress(function(ev) {
+			if(ev.which === 122) {
+				console.log('z', paperData.zValue);
+				paperData.zValue += 1;
+				// $('.z').text('zValue:' + zValue);
+			}
+			else if(ev.which === 120) {
+				console.log('x', paperData.xValue);
+				paperData.xValue += 1;
+				// $('.x').text('xValue:' + xValue);
+			}
+			else if(ev.which === 121) {
+				console.log('x', paperData.xValue);
+				paperData.xValue -= 1;
+				// $('.x').text('xValue:' + xValue);
+			} 
+			// console.log('keypress', ev.which);
+		});
+
+
+		new Vue({
+			el: '#app',
+			data: paperData
+		});
+
+		setInterval(function() {
+
+			if(paperData.zValue > 10) { paperData.zValue -= 1; }
+			if(paperData.xValue > 10) { paperData.xValue -= 1; }
+		}, 800);
+
+		// function start() {
+		// 	var loopIt = function(){
+		// 	requestAnimationFrame(loopIt);
+		// 		if(zValue > 0 || xValue > 0) {
+		// 			console.log('woot');
+		// 		}
+		// 	};
+		// 	loopIt();
+		// }
+		// start();
+	</script>
+</body>
