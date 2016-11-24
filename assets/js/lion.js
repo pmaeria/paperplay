@@ -3,5 +3,9 @@ document.body.onkeyup = function(e){
         document.querySelector('.roar').play();
         const lionClass = document.querySelector('.lion').classList;
         lionClass.toggle('show');
+
+      	setTimeout(function(){
+	        lionClass.toggle('show');
+      	},3000);
     }
 };

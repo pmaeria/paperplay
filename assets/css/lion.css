@@ -1,7 +1,7 @@
 html,
 body {
   height: 100%;
-  background-image: url("../images/background-taronga.svg");
+  background-image: url("../images/background-taronga-reversed.png");
   background-size: cover;
   margin: 0;
 }
@@ -18,8 +18,6 @@ canvas {
 .t-logo { width: 14%; }
 
 .lion {
-  /*background-color: orange;*/
-  /*height: 125px;*/
   width: 15%;
   position: absolute;
   bottom: 0;
