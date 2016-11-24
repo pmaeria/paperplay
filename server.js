@@ -48,7 +48,7 @@ app.get('/example', function(req, res) {
     res.sendfile(__dirname + '/example.html');
 });
 app.get('/horses', function(req, res) {
-    res.sendfile(__dirname + '/horses.html');
+    res.render('horses', {});
 });
 
 app.get('/lion', function(req, res) {
