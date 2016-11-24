@@ -109,6 +109,7 @@
 
   </style>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -172,13 +173,35 @@
     }
 
     socketInit(function(data) {
+
       console.log('data', data);
-      if(data.indexOf(0001)) moveHorse('a');
-      if(data.indexOf(0002)) moveHorse('z');
-      if(data.indexOf(0003)) moveHorse('e');
-      if(data.indexOf(0004)) moveHorse('r');
-      if(data.indexOf(0005)) moveHorse('t');
-      if(data.indexOf(0006)) moveHorse('y');
+
+      data.forEach(function(id) {
+        if(id.indexOf('39B135040001') > -1) {
+          moveHorse('a');
+          console.log('receiving a', id);
+        }
+        if(id.indexOf('39B135040002') > -1) {
+          moveHorse('z');
+          console.log('receiving z', id);
+        }
+        if(id.indexOf('39B135040003') > -1) {
+          moveHorse('e');
+          console.log('receiving e', id);
+        }
+        if(id.indexOf('39B135040004') > -1) {
+          moveHorse('r');
+          console.log('receiving r', id);
+        }
+        if(id.indexOf('39B135040005') > -1) {
+          moveHorse('t');
+          console.log('receiving t', id);
+        }
+        if(id.indexOf('39B135040006') > -1) {
+          moveHorse('y');
+          console.log('receiving y', id);
+        }
+      });
     });
 
     window.myStore = {
