@@ -1,15 +1,39 @@
-const express = require('express.io')
-const app = express().http().io()
+var express = require('express.io');
+var app = express().http().io();
+var bodyParser = require('body-parser');
+
+var _ = require('lodash');
 
 // set templating engine
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 
-
+app.use(bodyParser());
 app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function(req, res) {
 	res.send('<h1>Paper Play!</h1>');
+});
+
+
+app.post('/', function(req, res) {
+	// console.log('rfid post', req.body);
+	var values = req.body.field_values.replace(/\"/g, '');
+	var ids = values.split('\n');
+	
+	var filtered = ids.filter(function(id) {
+		return id.indexOf('E200497E95A') > -1;
+	});
+
+	if(filtered.length > 0) {
+		var uniqueIds = _.uniq(filtered);
+		console.log('rfid unique', uniqueIds);
+
+		// broadcast an array of unique rfids triggered
+		app.io.broadcast('rfid', uniqueIds);
+	}
+
+	res.send('ok');
 });
 
 
