@@ -18,15 +18,15 @@ canvas {
 .t-logo { width: 14%; }
 
 .lion {
-  width: 15%;
+  width: 14%;
   position: absolute;
   bottom: 0;
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 1s cubic-bezier(0.255, 0.775, 0.33, 1.575);
+  transition:         all 1s cubic-bezier(0.255, 0.775, 0.33, 1.575); 
   animation-fill-mode: forwards;
   animation: move 10s linear infinite;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  -webkit-transform: translateY(0) scale(1);
+          transform: translateY(0) scale(1);
 }
 
 @keyframes move {
@@ -38,7 +38,7 @@ canvas {
 }
 
 .lion.show {
-  -webkit-transform: translateY(-95%);
-          transform: translateY(-95%);
+  -webkit-transform: translateY(-100%) scale(1.3);
+          transform: translateY(-100%) scale(1.3);
   animation-play-state: paused;
 }
