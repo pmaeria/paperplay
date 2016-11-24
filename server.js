@@ -9,6 +9,9 @@ app.get('/', function(req, res) {
 app.get('/example', function(req, res) {
     res.sendfile(__dirname + '/example.html');
 });
+app.get('/horses', function(req, res) {
+    res.sendfile(__dirname + '/horses.html');
+});
 
 // broadcast rfid tag id to clients
 app.get('/rfid/:id', function(req, res) {
