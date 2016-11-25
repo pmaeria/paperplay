@@ -6,6 +6,6 @@ document.body.onkeyup = function(e){
 
       	setTimeout(function(){
 	        lionClass.toggle('show');
-      	},3000);
+      	},2000);
     }
 };

@@ -22,12 +22,14 @@ canvas {
   position: absolute;
   bottom: 0;
   -webkit-transition: all 1s cubic-bezier(0.255, 0.775, 0.33, 1.575);
-  transition:         all 1s cubic-bezier(0.255, 0.775, 0.33, 1.575); 
+  transition:         all 1s cubic-bezier(0.255, 0.775, 0.33, 1.575);
   animation-fill-mode: forwards;
   animation: move 10s linear infinite;
   -webkit-transform: translateY(0) scale(1);
           transform: translateY(0) scale(1);
 }
+
+.lion img { width: 100%; }
 
 @keyframes move {
     0%   {left: 0px;}

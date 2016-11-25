@@ -3,13 +3,13 @@
 	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-	<audio src="assets/sounds/roar.wav" class="roar"></audio>
+	<audio src="assets/sounds/tiger-roar1.wav" class="roar"></audio>
 	<div class="logo-container">
 		<img class="t-logo" src="assets/images/taronga-logo.png">
 		<img class="rfid-logo" src="assets/images/logo-rfid.svg">
 	</div>
 
-	<div class="lion"><img src="assets/images/lion-head.svg"></div>
+	<div class="lion"><img src="assets/images/lion-head.png"></div>
 	
 	<canvas id="canvas" width="1460" height="700"></canvas>
 	<br />
@@ -28,14 +28,14 @@
 		socketInit(function(data) {
 			console.log('data', data);
 			data.forEach(function(id) {
-				if(id.indexOf('39B135040007') > -1) {
+				if(id.indexOf('B1B135040007') > -1) {
 					document.querySelector('.roar').play();
 			        const lionClass = document.querySelector('.lion').classList;
 			        lionClass.toggle('show');
 
 			      	setTimeout(function(){
 				        lionClass.toggle('show');
-			      	},3000);
+			      	},1500);
 					console.log('receiving:', id);
 				}
 			});
