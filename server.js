@@ -47,6 +47,11 @@ app.get('/testview', function(req, res) {
 app.get('/example', function(req, res) {
     res.sendfile(__dirname + '/example.html');
 });
+
+app.get('/opinion', function(req, res) {
+    res.sendfile(__dirname + '/highchart.html');
+});
+
 app.get('/horses', function(req, res) {
     res.render('horses', {});
 });

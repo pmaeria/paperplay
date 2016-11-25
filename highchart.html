@@ -1,0 +1,114 @@
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+	window.lastValue  = 0;
+	$(function () {
+    $(document).ready(function () {
+
+    	window.addEventListener("keydown", function (event) {
+	        if (event.defaultPrevented) {
+	          return; // Do nothing if the event was already processed
+	        }
+	        
+	        switch (event.key) {
+	        case "y": 
+	        	window.lastValue ++;
+	        	break;
+	        case "n": 
+	        	window.lastValue --;
+	        	break;
+	        default:
+	          return; // Quit when this doesn't handle the key event.
+	        }
+
+	        // Cancel the default action to avoid it being handled twice
+	        // event.preventDefault();
+	      }, true);
+
+
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+
+        Highcharts.chart('container', {
+            chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                    load: function () {
+                    	var series = this.series[0];
+                        setInterval(function () {
+                            var x = (new Date()).getTime(), // current time
+                                y = window.lastValue;
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                },
+                alignTicks:false
+            },
+            title: {
+                text: 'Opinion'
+            },
+            xAxis: {
+                type: 'logarithmic'
+            },
+            yAxis: {
+                title: {
+                    text: 'Value'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }],
+                min: -50,
+                max: 50,
+                tickInterval: 50
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Random data',
+                threshold: 0,
+        		negativeColor: 'red',
+        		color: '#bada55',
+                data: (function () {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -19; i <= 0; i += 1) {
+                        data.push({
+                            x: time + i * 100,
+                            y: Math.random()
+                        });
+                    }
+                    return data;
+                }())
+            }]
+        });
+    });
+});
+</script>
+</body>
