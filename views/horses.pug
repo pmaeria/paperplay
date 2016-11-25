@@ -109,8 +109,8 @@ html
 
 
 	.intro(data-hidden="false")
-		h1 Paper Play !
-		p Get your flyer, pick your horse, smash it, and win !
+		h1 🗒 Paper Play 🕹 !
+		p Get your flyer 📰, pick your horse 🐴, smash it 👇, and win 🏆 !
 		p.
 			Paper Play uses an RFID technology embeded in the paper itself, interaction with touch action.
 			Each horse on the flyer is assigned to a specific RFID tag, that we match to one on screen.
@@ -154,27 +154,27 @@ html
 		  console.log('data', data);
 
 		  data.forEach(function(id) {
-			if(id.indexOf('39B135040001') > -1) {
+			if(id.indexOf('39B135040003') > -1) {
 				moveHorse('a');
 				console.log('receiving a', id);
 			}
-			if(id.indexOf('39B135040002') > -1) {
+			if(id.indexOf('39B135040004') > -1) {
 				moveHorse('z');
 				console.log('receiving z', id);
 			}
-			if(id.indexOf('39B135040003') > -1) {
+			if(id.indexOf('39B135040005') > -1) {
 				moveHorse('e');
 				console.log('receiving e', id);
 			}
-			if(id.indexOf('39B135040004') > -1) {
+			if(id.indexOf('39B135040006') > -1) {
 				moveHorse('r');
 				console.log('receiving r', id);
 			}
-			if(id.indexOf('39B135040005') > -1) {
+			if(id.indexOf('39B135040001') > -1) {
 				moveHorse('t');
 				console.log('receiving t', id);
 			}
-			if(id.indexOf('39B135040006') > -1) {
+			if(id.indexOf('39B135040002') > -1) {
 				moveHorse('y');
 				console.log('receiving y', id);
 			}
@@ -215,7 +215,8 @@ html
 				if(item === choosenHorse){
 					myStore.votes[myStore.horses.indexOf(item)] = myStore.votes[myStore.horses.indexOf(item)] + 1;
 				}
-				var newPos = 80*myStore.votes[myStore.horses.indexOf(item)]/Math.max(...myStore.votes);
+				var newPos = myStore.votes[myStore.horses.indexOf(item)] * 10;
+				//- var newPos = 80*myStore.votes[myStore.horses.indexOf(item)]/Math.max(...myStore.votes);
 				document.querySelector('.'+item+' svg').style.transform = 'translateX('+newPos+'vw)';
 				console.log('[Horse:%s] [newPos: 80*%s/%s=%s]', item, myStore.votes[myStore.horses.indexOf(item)], Math.max(...myStore.votes), newPos);
 			})
@@ -225,12 +226,12 @@ html
 			myStore.running = true;
 			document.querySelector('.intro').setAttribute("data-hidden", true);
 			document.querySelector('.scene').setAttribute("data-hidden", false);
-			setTimeout(function(){
-				myStore.running = false;
-				document.querySelector('.scene').setAttribute("data-hidden", true);
-				document.querySelector('.winner').setAttribute("data-hidden", false);
-				document.querySelector('#winner').innerHTML = myStore.votes.indexOf(Math.max(...myStore.votes)) + 1;
-			}, 5000)
+			//- setTimeout(function(){
+			//- 	myStore.running = false;
+			//- 	document.querySelector('.scene').setAttribute("data-hidden", true);
+			//- 	document.querySelector('.winner').setAttribute("data-hidden", false);
+			//- 	document.querySelector('#winner').innerHTML = myStore.votes.indexOf(Math.max(...myStore.votes)) + 1;
+			//- }, 10000)
 		});
 
 
