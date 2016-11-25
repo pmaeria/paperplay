@@ -476,7 +476,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 60vh;
-  top: 36%; }
+  top: 40%; }
 
 .horses > div {
   position: absolute;
@@ -550,6 +550,9 @@ body {
     width: auto; }
   .y .horseColor {
     fill: cyan; }
+
+.t, .y {
+  display: none; }
 
 .winner {
   position: absolute;
