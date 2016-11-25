@@ -105,16 +105,18 @@ html
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js")
 		script(src="/socket.io/socket.io.js")
 		link(rel="stylesheet", href="assets/css/horses.css")
-		link(href="https://fonts.googleapis.com/css?family=Kanit:900|Montserrat|Suez+One" rel="stylesheet")
+		link(href="https://fonts.googleapis.com/css?family=Josefin+Sans|Kanit:900|Montserrat|Suez+One" rel="stylesheet")
 
-	.intro
+
+	.intro(data-hidden="false")
 		h1 Paper Play !
 		p Get your flyer, pick your horse, smash it, and win !
 		p.
 			Paper Play uses an RFID technology embeded in the paper itself, interaction with touch action.
 			Each horse on the flyer is assigned to a specific RFID tag, that we match to one on screen.
+		button#playbutton Play now !
 
-	.scene
+	.scene(data-hidden="true")
 		.horses
 			.a
 				span.name.name-a 1 - Idéal du Gazeau
@@ -136,7 +138,7 @@ html
 				+horseNew('6')
 		.finishLine
 
-	.winner
+	.winner(data-hidden="true")
 		h1 End of the race !
 		p Number #[span#winner] won the game !
 
@@ -182,7 +184,8 @@ html
 		window.myStore = {
 			totalVotes: 0,
 			horses: ['a','z','e','r','t','y'],
-			votes: [0,0,0,0,0,0]
+			votes: [0,0,0,0,0,0],
+			running: false
 		}
 		window.addEventListener("keydown", function (event) {
 			if (event.defaultPrevented) {
@@ -199,10 +202,10 @@ html
 			default:
 				return; // Quit when this doesn't handle the key event.
 			}
-			moveHorse(event.key);
+			if(myStore.running) moveHorse(event.key);
 
 			// Cancel the default action to avoid it being handled twice
-			event.preventDefault();
+			// event.preventDefault();
 		}, true);
 
 
@@ -217,4 +220,22 @@ html
 				console.log('[Horse:%s] [newPos: 80*%s/%s=%s]', item, myStore.votes[myStore.horses.indexOf(item)], Math.max(...myStore.votes), newPos);
 			})
 		};
+
+		document.querySelector('#playbutton').addEventListener("click", function(){
+			myStore.running = true;
+			document.querySelector('.intro').setAttribute("data-hidden", true);
+			document.querySelector('.scene').setAttribute("data-hidden", false);
+			setTimeout(function(){
+				myStore.running = false;
+				document.querySelector('.scene').setAttribute("data-hidden", true);
+				document.querySelector('.winner').setAttribute("data-hidden", false);
+				document.querySelector('#winner').innerHTML = myStore.votes.indexOf(Math.max(...myStore.votes)) + 1;
+			}, 5000)
+		});
+
+
+
+
+
+
 		
